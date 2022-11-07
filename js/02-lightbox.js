@@ -28,6 +28,10 @@ function onImageClick(event) {
     return;
   }
 
+  interactivForGallery();
+}
+
+function interactivForGallery() {
   const settiongsLightbox = {
     captions: true,
     captionsData: "alt",
@@ -36,6 +40,4 @@ function onImageClick(event) {
   };
 
   const lightbox = new SimpleLightbox(".gallery__item", settiongsLightbox);
-
-  //   return lightbox;
 }
