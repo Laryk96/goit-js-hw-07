@@ -3,16 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryEl = document.querySelector(".gallery");
 
-const createGalleryItems = createItemImage(galleryItems);
-
-galleryEl.innerHTML = createGalleryItems;
-
-// const galleryLinkEl = document.querySelector(".gallery__link");
-
-// galleryLinkEl.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   console.log("click");
-// });
+galleryEl.innerHTML = createItemImage(galleryItems);
 
 galleryEl.addEventListener("click", onImageClick);
 
@@ -43,23 +34,25 @@ function onImageClick(event) {
     return;
   }
 
-  openModal(targetEl);
+  openModalOpen(targetEl);
 }
 
-function openModal(element) {
+function openModalOpen(element) {
   const instance = basicLightbox.create(`
     <img src="${element.dataset.source}" width="800" height="600">
 `);
 
   instance.show();
 
-  closeModal(instance);
+  closeModalOpen(instance);
 }
 
-function closeModal(instance) {
+function closeModalOpen(instance) {
   galleryEl.addEventListener("keydown", (event) => {
     instance;
-    if (event.code === "Escape") {
+    if (event.code !== "Escape") {
+      return;
+    } else {
       instance.close();
     }
   });

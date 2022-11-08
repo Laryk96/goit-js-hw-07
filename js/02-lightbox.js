@@ -3,11 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryEl = document.querySelector(".gallery");
 
-const collection = createItemImage(galleryItems);
-
-galleryEl.innerHTML = collection;
-
-galleryEl.addEventListener("click", onImageClick);
+galleryEl.innerHTML = createItemImage(galleryItems);
 
 function createItemImage(items) {
   return items
@@ -19,25 +15,9 @@ function createItemImage(items) {
     .join("");
 }
 
-function onImageClick(event) {
-  event.preventDefault();
-
-  const tagEl = event.target.nodeName;
-
-  if (tagEl !== "IMG") {
-    return;
-  }
-
-  interactivForGallery();
-}
-
-function interactivForGallery() {
-  const settiongsLightbox = {
-    captions: true,
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-  };
-
-  const lightbox = new SimpleLightbox(".gallery__item", settiongsLightbox);
-}
+new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
