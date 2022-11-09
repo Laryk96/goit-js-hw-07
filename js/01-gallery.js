@@ -34,26 +34,25 @@ function onImageClick(event) {
     return;
   }
 
-  openModalOpen(targetEl);
+  toggleModalGallery(targetEl);
 }
 
-function openModalOpen(element) {
+function toggleModalGallery(element) {
   const instance = basicLightbox.create(`
     <img src="${element.dataset.source}" width="800" height="600">
 `);
 
   instance.show();
 
-  closeModalOpen(instance);
-}
+  window.addEventListener("keydown", closeModal);
 
-function closeModalOpen(instance) {
-  galleryEl.addEventListener("keydown", (event) => {
-    instance;
-    if (event.code !== "Escape") {
+  function closeModal(event) {
+    if (!basicLightbox.visible()) {
       return;
-    } else {
-      instance.close();
     }
-  });
+    if (event.code === "Escape") {
+      instance.close();
+      window.removeEventListener("keydown", closeModal);
+    }
+  }
 }
